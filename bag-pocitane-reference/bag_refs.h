@@ -46,5 +46,5 @@ public:
     friend ostream & operator << (ostream & os, const Bag & b);
 
     
-    friend void printPtrs (Bag * bag, int indent = 0);
+    friend void printPtrs (const Bag * bag, int indent = 0);
 };

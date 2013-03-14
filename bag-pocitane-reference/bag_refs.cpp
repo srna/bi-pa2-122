@@ -14,7 +14,9 @@
 using namespace std;
 
 const int INIT_SIZE = 2;
-const int GAP       = 10;
+
+//indentation of printed info about bag and its pocket
+const int GAP       = 13; 
 
 Bag::Pocket::Pocket ()
 {
@@ -29,7 +31,7 @@ Bag::Pocket::Pocket ()
 Bag::Pocket::Pocket (const Pocket & from)
 {
     cout << "Creating new pocket:" << setw (55 + GAP) << "" << this << endl;
-    cout << "    as duplacita of:" << setw (55 + GAP) << "" << &from << endl;
+    cout << "    as duplicate of:" << setw (55 + GAP) << "" << &from << endl;
 
     size = from.size;
     count = from.count;
@@ -58,8 +60,8 @@ Bag::Bag ()
 
 Bag::Bag (const Bag & b)
 {
-    cout << "Creating new bag using shared pocket:"
-         << setw (14 + GAP) << "" << this << endl;
+    cout << "Creating new bag using already created pocket:"
+         << setw (5 + GAP) << "" << this << endl;
     
     connectTo (b.pocket);
 }
@@ -102,8 +104,8 @@ void Bag::resize (int newsize)
         cout << "decreasing";
     }
 
-    cout << " size from " << setw (2) << pocket->size
-         << " to " <<  setw (2) << newsize << " of pocket";
+    cout << " size of pocket from " << setw (2) << pocket->size
+         << " to " <<  setw (2) << newsize;
     printPtrs (this);
     
     int * newdata;
@@ -224,13 +226,14 @@ ostream & operator << (ostream & os, const Bag & bag)
     }
 
     os << "]" << endl;
-    os << "   refs: "  << setw(2)  << bag.pocket->refs << endl;
+    os << "   refs: "  << setw(2)  << bag.pocket->refs;
+    printPtrs (&bag, 35);
 
     return os;
 }
 
 
-void printPtrs (Bag * bag, int indent)
+void printPtrs (const Bag * bag, int indent)
 {
     cout << setw (GAP + indent) << "";
     cout << "Bag: " << bag << ", Pocket: " << bag->pocket << endl;
